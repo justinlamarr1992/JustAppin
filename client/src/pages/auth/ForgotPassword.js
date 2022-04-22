@@ -21,18 +21,18 @@ const ForgotPassword = () => {
       url: process.env.REACT_APP_FORGOT_PASSWORD_REDIRECT,
       handleCodeInApp: true,
     };
-    await auth
-      .sendPasswordResetEmail(email, config)
-      .then(() => {
-        setEmail("");
-        setLoading(false);
-        toast.success("Check Your Email for the password reset Link");
-      })
-      .catch((error) => {
-        setLoading(false);
-        toast.error(error.message);
-        console.log("ERROR MESSAGE IN FORGOT PASSWORD", error);
-      });
+    // await auth
+    //   .sendPasswordResetEmail(email, config)
+    //   .then(() => {
+    //     setEmail("");
+    //     setLoading(false);
+    //     toast.success("Check Your Email for the password reset Link");
+    //   })
+    //   .catch((error) => {
+    //     setLoading(false);
+    //     toast.error(error.message);
+    //     console.log("ERROR MESSAGE IN FORGOT PASSWORD", error);
+    //   });
   };
   return (
     <div className="container col-md-6 offset-md-3 p-5">

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useUserAuth } from "../../context/UserAuthContent";
 import { getAuth } from "../../firebase";
 import { toast } from "react-toastify";
 
 const Register = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { signUp } = useUserAuth();
 
   const navigate = useNavigate();
 
@@ -16,19 +20,13 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("env", process.env.REACT_APP_REGISTER_REDIRECT_URL);
-
-    const config = {
-      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
-      handleCodeInApp: true,
-    };
-
-    await auth.sendSignInLinkToEmail(email, config);
-    toast.success(`Email is sent to ${email} click link to complete`);
-    // save user email to local storage
-    window.localStorage.setItem("emailForRegistration", email);
-    //clear state
-    setEmail("");
+    setError("");
+    try {
+      await signUp(email, password);
+    } catch (err) {
+      setError(err.message);
+      toast.error(`There was an error of ${err.message}`);
+    }
   };
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
@@ -39,6 +37,13 @@ const Register = () => {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your Email"
         autoFocus
+      />
+      <input
+        type="password"
+        className="form-control"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Your Password"
       />
       <button type="submit" className="btn btn-raised btn-primary">
         Register

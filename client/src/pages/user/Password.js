@@ -10,17 +10,17 @@ const Password = () => {
     e.preventDefault();
     setLoading(true);
     console.log(password);
-    await auth.currentUser
-      .updatePassword(password)
-      .then(() => {
-        setLoading(false);
-        setPassword("");
-        toast.success("Password Updated");
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(err.message);
-      });
+    // await auth.currentUser
+    //   .updatePassword(password)
+    //   .then(() => {
+    //     setLoading(false);
+    //     setPassword("");
+    //     toast.success("Password Updated");
+    //   })
+    //   .catch((err) => {
+    //     setLoading(false);
+    //     toast.error(err.message);
+    //   });
   };
   const passwordUpdateForm = () => (
     <form>

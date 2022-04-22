@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firebase";
+// import { db } from "../../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 const CTA = () => {
@@ -11,18 +11,18 @@ const CTA = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const docReference = addDoc(collection(db, "justappin_users"), {
-        name: name,
-        company: company,
-        email: email,
-        phone: phone,
-        // FIGURE THIS OUT
-        // createdAt: new Timestamp.toDate(),
-      });
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    // try {
+    //   const docReference = addDoc(collection(db, "justappin_users"), {
+    //     name: name,
+    //     company: company,
+    //     email: email,
+    //     phone: phone,
+    //     // FIGURE THIS OUT
+    //     // createdAt: new Timestamp.toDate(),
+    //   });
+    // } catch (e) {
+    //   console.error("Error adding document: ", e);
+    // }
     setName("");
     setCompany("");
     setEmail("");

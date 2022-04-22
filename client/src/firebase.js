@@ -1,28 +1,24 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import "firebase/compat/auth";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-// Follow this pattern to import other Firebase services
-// import { } from 'firebase/<service>';
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// firebase config
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
-  appId: process.env.REACT_APP_FIREBASE_APPID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASURMENTID,
+  apiKey: "AIzaSyAsipmmWmDBJKj6cy6GzszyGpdVma3z12c",
+  authDomain: "justappin-e499e.firebaseapp.com",
+  projectId: "justappin-e499e",
+  storageBucket: "justappin-e499e.appspot.com",
+  messagingSenderId: "1084760364098",
+  appId: "1:1084760364098:web:4e0958bfe2513f5cfd09db",
+  measurementId: "G-PJ4J2CWPX6",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-export const db = getFirestore(firebaseApp);
-
-const auth = getAuth(app);
-
-// const auth = firebase.getAuth();
-export const googleAuthProvider = new GoogleAuthProvider();
-
-export default auth;
+export const auth = getAuth(app);
+const analytics = getAnalytics(app);
+export default app;

@@ -25,43 +25,43 @@ const RegisterComplete = () => {
       toast.error("Password must be at least 6 characters long");
       return;
     }
-    try {
-      const auth = getAuth(firebaseApp);
-      const result = await auth.signInWithEmailLink(
-        email,
-        window.location.href
-      );
-      if (result.user.emailVerified) {
-        //   remove user email from local storage
-        window.localStorage.removeItem("emailForRegistration");
-        // get ID Token
-        let user = auth.currentUser;
-        await user.updatePassword(password);
-        const idTokenResult = await user.getIdTokenResult();
+    // try {
+    //   const auth = getAuth(firebaseApp);
+    //   const result = await auth.signInWithEmailLink(
+    //     email,
+    //     window.location.href
+    //   );
+    //   if (result.user.emailVerified) {
+    //     //   remove user email from local storage
+    //     window.localStorage.removeItem("emailForRegistration");
+    //     // get ID Token
+    //     let user = auth.currentUser;
+    //     await user.updatePassword(password);
+    //     const idTokenResult = await user.getIdTokenResult();
 
-        console.log("user", user, "idTokenResult", idTokenResult);
-        createOrUpdateUser(idTokenResult.token)
-          .then((res) =>
-            dispatch({
-              type: "LOGGED_IN_USER",
-              payload: {
-                name: res.data.name,
-                email: res.data.email,
-                token: idTokenResult.token,
-                role: res.data.role,
-                _id: res.data._id,
-              },
-            })
-          )
-          .catch((err) => console.log(err));
-        // Reux store
-        // redirect
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
-    }
+    //     console.log("user", user, "idTokenResult", idTokenResult);
+    //     createOrUpdateUser(idTokenResult.token)
+    //       .then((res) =>
+    //         dispatch({
+    //           type: "LOGGED_IN_USER",
+    //           payload: {
+    //             name: res.data.name,
+    //             email: res.data.email,
+    //             token: idTokenResult.token,
+    //             role: res.data.role,
+    //             _id: res.data._id,
+    //           },
+    //         })
+    //       )
+    //       .catch((err) => console.log(err));
+    //     // Reux store
+    //     // redirect
+    //     navigate("/");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    //   toast.error(error.message);
+    // }
   };
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegistration"));
