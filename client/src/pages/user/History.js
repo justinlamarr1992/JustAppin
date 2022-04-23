@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useUserAuth } from "../../context/UserAuthContent";
 import { getUserOrders } from "../../functions/user";
 import ShowPaymentInfo from "../../components/cards/ShowPaymentInfo";
 import UserNav from "../../components/nav/UserNav";
 import Invoice from "../../components/order/Invoice";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  ConsoleSqlOutlined,
+} from "@ant-design/icons";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { toast } from "react-toastify";
+import { Button } from "antd";
 
 const History = () => {
+  const { user, logOut } = useUserAuth();
+  console.log(user);
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   // const [orders, setOrders] = useState([]);
   // const { user } = useSelector((state) => ({ ...state }));
 
@@ -84,6 +99,10 @@ const History = () => {
         <div className="col-md-2">
           <UserNav />
         </div>
+        {user && user.email}
+        {/* LOG OUT CODE */}
+        <Button onClick={handleLogOut}>Log Out</Button>
+        {/* LOG OUT CODE */}
         {/* <div className="col text-center">
           <h4>
             {orders.length > 0 ? "User Purchase Orders" : "No Purchased Orders"}

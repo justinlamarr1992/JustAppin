@@ -4,10 +4,15 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
-const userAuthContext = createContext();
+const userAuthContext = createContext({
+  user: null,
+});
+const USER = { name: "Guest", isGuestUser: true };
 
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState("");
@@ -17,6 +22,13 @@ export function UserAuthContextProvider({ children }) {
   function logIn(email, password) {
     console.log("Email", email);
     return signInWithEmailAndPassword(auth, email, password);
+  }
+  function logOut() {
+    return signOut(auth);
+  }
+  function googleSignIn() {
+    const googleAuthProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleAuthProvider);
   }
 
   useEffect(() => {
@@ -29,10 +41,12 @@ export function UserAuthContextProvider({ children }) {
   }, []);
 
   return (
-    <userAuthContext.Provider value={{ user, signUp, logIn }}>
+    <userAuthContext.Provider
+      value={{ user, signUp, logIn, logOut, googleSignIn }}
+    >
       {children}
     </userAuthContext.Provider>
-  ); // removed ".Provider value={}""
+  );
 }
 
 export function useUserAuth() {

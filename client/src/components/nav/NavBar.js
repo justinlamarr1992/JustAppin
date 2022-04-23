@@ -28,7 +28,7 @@ const { SubMenu, Item } = Menu;
 const NavBar = () => {
   const [current, setCurrent] = useState("home");
   const { user } = useUserAuth();
-  console.log(user);
+  // console.log(user);
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -120,6 +120,35 @@ const NavBar = () => {
                 </Link>
               )}
             </li> */}
+            <li>
+              {!user && (
+                <Link key="login" className="" to="/login">
+                  Login
+                </Link>
+              )}
+              {user && user.role === "lead" && (
+                <Link to="/user/history">
+                  {user.email && user.email.split("@")[0]}
+                </Link>
+              )}
+              {user && user.role === "admin" && (
+                <Link to="/admin/dashboard">Dashboard</Link>
+              )}
+            </li>
+
+            <li>
+              {!user && (
+                <Link key="register" className="" to="/register">
+                  Register
+                </Link>
+              )}
+
+              {user && (
+                <Link key="logout" className="" onClick={logout} to="/">
+                  LogOut, {user.name}
+                </Link>
+              )}
+            </li>
           </ul>
         </nav>
         {/* <a class="header-cta-button" href="#cta">

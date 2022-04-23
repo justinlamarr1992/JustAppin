@@ -14,7 +14,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { logIn } = useUserAuth();
+  const { logIn, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,36 +55,15 @@ const Login = () => {
     }
   };
 
-  // Testing onlines
-  // TESTING ONLINES
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
 
-  const googleLogin = async () => {
-    // auth
-    //   .signInWithPopup(googleAuthProvider)
-    //   .then(async (result) => {
-    //     const { user } = result;
-    //     const idTokenResult = await user.getIdTokenResult();
-    //     createOrUpdateUser(idTokenResult.token)
-    //       .then((res) => {
-    //         dispatch({
-    //           type: "LOGGED_IN_USER",
-    //           payload: {
-    //             name: res.data.name,
-    //             email: res.data.email,
-    //             token: idTokenResult.token,
-    //             role: res.data.role,
-    //             _id: res.data._id,
-    //           },
-    //         });
-    //         roleBasedRedirect(res);
-    //       })
-    //       .catch((err) => console.log(err));
-    //     // navigate("/");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     toast.error(err.message);
-    //   });
+    try {
+      await googleSignIn();
+      navigate("/user/history");
+    } catch (err) {
+      setError(err.message);
+    }
   };
   const loginForm = () => (
     <form onSubmit={handleSubmit}>
@@ -131,7 +110,7 @@ const Login = () => {
           )} */}
           {loginForm()}
           <Button
-            onClick={googleLogin}
+            onClick={handleGoogleSignIn}
             type="danger"
             className="mb-3"
             block
