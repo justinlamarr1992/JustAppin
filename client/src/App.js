@@ -44,6 +44,7 @@ const CreateDiscountPage = lazy(() =>
 );
 const AdminRoute = lazy(() => import("./components/routes/AdminRoute"));
 const UserRoute = lazy(() => import("./components/routes/UserRoute"));
+const ProtectedRoute = lazy(() => import("./components/routes/ProtectedRoute"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -102,9 +103,9 @@ const App = () => {
           <Route
             path="/user/history"
             element={
-              <UserRoute>
+              <ProtectedRoute>
                 <History />
-              </UserRoute>
+              </ProtectedRoute>
             }
           />
           <Route

@@ -15,6 +15,7 @@ export function UserAuthContextProvider({ children }) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
   function logIn(email, password) {
+    console.log("Email", email);
     return signInWithEmailAndPassword(auth, email, password);
   }
 
@@ -28,7 +29,7 @@ export function UserAuthContextProvider({ children }) {
   }, []);
 
   return (
-    <userAuthContext.Provider value={{ user, signUp }}>
+    <userAuthContext.Provider value={{ user, signUp, logIn }}>
       {children}
     </userAuthContext.Provider>
   ); // removed ".Provider value={}""

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
+import { useUserAuth } from "../../context/UserAuthContent";
 // import { auth, googleAuthProvider } from "";
 // import { getAuth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
@@ -12,9 +13,21 @@ import { createOrUpdateUser } from "../../functions/auth";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
+  const [error, setError] = useState("");
+  const { logIn } = useUserAuth();
   const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await logIn(email, password);
+      navigate("/user/history");
+    } catch (err) {
+      setError(err.message);
+      toast.error(`There was an error of ${err.message}`);
+    }
+  };
+
   const location = useLocation();
   let dispatch = useDispatch();
 
@@ -40,56 +53,6 @@ const Login = () => {
         navigate("/user/history");
       }
     }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    console.table(email, password);
-    // try {
-    //   let res = await auth.signInWithEmailAndPassword(email, password);
-    //   if (res.data) {
-    //     console.log(
-    //       "SAVE USER RES IN REDUX AND LOCAL STORAGE THE REDIRECT ==>"
-    //     );
-    //     console.log(res.data);
-    //     // save user and token to redux
-    //     dispatch({ type: "LOGGED_IN_USER", payload: res.data });
-    //     navigate("/dashboard");
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   if (err.response.status === 400) toast.error(err.response.data);
-    //   setLoading(false);
-    // }
-
-    // try {
-    //   const result = await auth.signInWithEmailAndPassword(email, password);
-    //   console.log(result);
-    //   const { user } = result;
-    //   const idTokenResult = await user.getIdTokenResult();
-    //   createOrUpdateUser(idTokenResult.token)
-    //     .then((res) => {
-    //       dispatch({
-    //         type: "LOGGED_IN_USER",
-    //         payload: {
-    //           name: res.data.name,
-    //           email: res.data.email,
-    //           token: idTokenResult.token,
-    //           role: res.data.role,
-    //           _id: res.data._id,
-    //         },
-    //       });
-    //       roleBasedRedirect(res);
-    //     })
-    //     .catch((err) => console.log(err));
-
-    //   // navigate("/");
-    // } catch (error) {
-    //   console.log(error);
-    //   toast.error(error.message);
-    //   setLoading(false);
-    // }
   };
 
   // Testing onlines
@@ -129,7 +92,6 @@ const Login = () => {
         <input
           type="email"
           className="form-control"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your Email"
           autoFocus
@@ -139,7 +101,6 @@ const Login = () => {
         <input
           type="password"
           className="form-control"
-          value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Your Password"
         />
@@ -163,11 +124,11 @@ const Login = () => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading ? (
+          {/* {loading ? (
             <h4>Login</h4>
           ) : (
             <h4 className="text-danger">Loading...</h4>
-          )}
+          )} */}
           {loginForm()}
           <Button
             onClick={googleLogin}

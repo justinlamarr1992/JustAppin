@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContent";
 import { getAuth } from "../../firebase";
 import { toast } from "react-toastify";
@@ -10,24 +10,24 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { signUp } = useUserAuth();
-
   const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signUp(email, password);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+      toast.error(`There was an error of ${err.message}`);
+    }
+  };
 
   const { user } = useSelector((state) => ({ ...state }));
   useEffect(() => {
     if (user && user.token) navigate("/");
   }, [user, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await signUp(email, password);
-    } catch (err) {
-      setError(err.message);
-      toast.error(`There was an error of ${err.message}`);
-    }
-  };
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
       <input
