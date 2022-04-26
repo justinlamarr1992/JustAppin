@@ -8,11 +8,11 @@ import { currentAdmin } from "../../functions/auth";
 
 const AdminRoute = ({ children, ...rest }) => {
   const [ok, setOk] = useState(false);
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    if (user && user.token) {
-      currentAdmin(user.token)
+    if (active && active.token) {
+      currentAdmin(active.token)
         .then((res) => {
           console.log("CURRENT ADMIN RES", res);
           setOk(true);
@@ -29,7 +29,7 @@ const AdminRoute = ({ children, ...rest }) => {
     ) : (
       <LoadingToRedirect />
     );
-  }, [user]);
+  }, [active]);
 
   return children;
 };

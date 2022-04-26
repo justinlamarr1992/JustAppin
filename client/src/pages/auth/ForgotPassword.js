@@ -9,10 +9,10 @@ const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
   useEffect(() => {
-    if (user && user.token) navigate("/");
-  }, [user, navigate]);
+    if (active && active.token) navigate("/");
+  }, [active, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

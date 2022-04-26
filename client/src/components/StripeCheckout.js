@@ -11,7 +11,7 @@ import Logo from "../images/Logo.png";
 const StripeCheckout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, discount } = useSelector((state) => ({ ...state }));
+  const { active, discount } = useSelector((state) => ({ ...state }));
 
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -26,7 +26,7 @@ const StripeCheckout = () => {
   const elements = useElements();
 
   useEffect(() => {
-    createPaymentIntent(user.token, discount).then((res) => {
+    createPaymentIntent(active.token, discount).then((res) => {
       console.log("create payment intent", res.data);
       setClientSecret(res.data.clientSecret);
       // additional response recieved on Successful Paayment
@@ -56,7 +56,7 @@ const StripeCheckout = () => {
     } else {
       // here yu get the result after success payment
       // create order and save in database for admin to process
-      createOrder(payload, user.token).then((res) => {
+      createOrder(payload, active.token).then((res) => {
         if (res.data.ok) {
           // empty cart from local Storage
           if (typeof window !== "undefined") localStorage.removeItem("cart");
@@ -71,7 +71,7 @@ const StripeCheckout = () => {
             payload: false,
           });
           // empty cart from database
-          emptyUserCart(user.token);
+          emptyUserCart(active.token);
         }
       });
       // empty user cart from redux store and local storage

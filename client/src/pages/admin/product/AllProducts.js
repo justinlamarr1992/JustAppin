@@ -9,7 +9,7 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadAllProducts();
@@ -32,7 +32,7 @@ const AllProducts = () => {
     let answer = window.confirm("Delete?");
     if (answer) {
       // console.log("Send delete request", slug);
-      removeProduct(slug, user.token)
+      removeProduct(slug, active.token)
         .then((res) => {
           loadAllProducts();
           toast.error(`${res.data.title} has been deleted`);

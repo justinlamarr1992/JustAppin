@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import { useNavigate, Link } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContent";
 // import { auth, googleAuthProvider } from "";
-// import { getAuth, googleAuthProvider } from "../../firebase";
+// import { getAuth } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
@@ -14,33 +14,55 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { logIn, googleSignIn } = useUserAuth();
-  const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await logIn(email, password);
-      navigate("/user/history");
-    } catch (err) {
-      setError(err.message);
-      toast.error(`There was an error of ${err.message}`);
-    }
-  };
 
+  const { logIn, googleSignIn, getIdToken } = useUserAuth();
+
+  const navigate = useNavigate();
   const location = useLocation();
   let dispatch = useDispatch();
 
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     let intended = location.state;
     if (intended) {
       return;
     } else {
-      if (user && user.token) navigate("/", { replace: true });
+      if (active && active.token) navigate("/", { replace: true });
     }
-  }, [user, navigate]);
+  }, [active, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const result = await logIn(email, password);
+      console.log("The result", result);
+      const active = result;
+      // const auth1 = getAuth();
+      // const idTokenResult = await getIdToken();
+      // console.log("idToken is :", idTokenResult);
+      // const idTokenResult = await active.getIdTokenResult();
+      // console.log("IDToken: ", idTokenResult);
+      // createOrUpdateUser(idTokenResult.token).then((res) => {
+      //   dispatch({
+      //     type: "LOGGED_IN_USER",
+      //     payload: {
+      //       name: res.data.name,
+      //       email: res.data.email,
+      //       token: idTokenResult.token,
+      //       role: res.data.role,
+      //       _id: res.data._id,
+      //     },
+      //   });
+      //   roleBasedRedirect(res);
+      // });
+      // // navigate("/user/history");
+    } catch (err) {
+      setError(err.message);
+      toast.error(`There was an error of ${err.message}`);
+    }
+  };
 
   const roleBasedRedirect = (res) => {
     let intended = location.state;
@@ -66,7 +88,7 @@ const Login = () => {
     }
   };
   const loginForm = () => (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div className="form-group">
         <input
           type="email"

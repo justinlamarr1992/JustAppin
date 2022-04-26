@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Avatar, Badge } from "antd";
 
 const FileUpload = ({ values, setValues, setLoading }) => {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
   const fileUploadAndResize = (e) => {
     console.log(e.target.files);
     //resize
@@ -27,7 +27,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
                 `${process.env.REACT_APP_API}/uploadimages`,
                 { image: uri },
                 {
-                  headers: { authtoken: user ? user.token : "" },
+                  headers: { authtoken: active ? active.token : "" },
                 }
               )
               .then((res) => {
@@ -55,7 +55,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
       .post(
         `${process.env.REACT_APP_API}/removeimage`,
         { public_id },
-        { headers: { authtoken: user ? user.token : "" } }
+        { headers: { authtoken: active ? active.token : "" } }
       )
       .then((res) => {
         setLoading(false);

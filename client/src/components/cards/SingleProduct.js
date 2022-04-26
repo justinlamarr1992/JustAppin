@@ -25,7 +25,7 @@ const SingleProduct = ({ product, onStarClick, star }) => {
   const { title, images, description, _id } = product;
   const [tooltip, setTooltip] = useState("Click to Add");
   // redux
-  const { user, cart } = useSelector((state) => ({ ...state }));
+  const { active, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -61,7 +61,7 @@ const SingleProduct = ({ product, onStarClick, star }) => {
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
-    addToWishlist(product._id, user.token).then((res) => {
+    addToWishlist(product._id, active.token).then((res) => {
       console.log("ADDED TO WISHLIST", res.data);
       toast.success("Added to Wishlist");
       navigate("/user/wishlist");

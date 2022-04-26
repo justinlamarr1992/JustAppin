@@ -1,0 +1,8 @@
+Connect the login with google and email in login and register with the 
+createOrUpdateUser/ currentUser in the client/ functions in order to 
+create the user or update them in the database
+
+Loging in and getting the accesstoken do not access the database. 
+This only allows the google server to say hey we handled the auth
+Not here is the user you saved and created in mongo
+have to make connect (FIGURE it out)

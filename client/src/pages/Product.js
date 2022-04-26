@@ -11,7 +11,7 @@ const Product = () => {
   const [star, setStar] = useState(0);
   const [related, setRelated] = useState([]);
   //redux
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   const { slug } = useParams();
 
@@ -20,9 +20,9 @@ const Product = () => {
   }, [slug]);
 
   useEffect(() => {
-    if (product.ratings && user) {
+    if (product.ratings && active) {
       let existingRatingObject = product.ratings.find(
-        (ele) => ele.postedBy.toString() === user._id.toString()
+        (ele) => ele.postedBy.toString() === active._id.toString()
       );
       existingRatingObject && setStar(existingRatingObject.star);
     }
@@ -39,7 +39,7 @@ const Product = () => {
   const onStarClick = (newRating, name) => {
     setStar(newRating);
     console.table(newRating, name);
-    productStar(name, newRating, user.token).then((res) => {
+    productStar(name, newRating, active.token).then((res) => {
       console.log("rating clicked", res.data);
       loadSingleProduct();
     });

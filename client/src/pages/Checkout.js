@@ -6,6 +6,7 @@ import {
   saveUserAddress,
   applyDiscount,
 } from "../functions/user";
+import { useUserAuth } from "../context/UserAuthContent";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
@@ -31,10 +32,12 @@ const Checkout = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
+  const { user, logOut } = useUserAuth();
+  console.log(user);
 
   useEffect(() => {
-    getUserCart(user.token).then((res) => {
+    getUserCart(active.token).then((res) => {
       console.log("user cart res", JSON.stringify(res.data, null, 4));
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
@@ -47,7 +50,7 @@ const Checkout = () => {
 
   const saveAddressToDb = (e) => {
     e.preventDefault();
-    saveUserAddress(user.token, address)
+    saveUserAddress(active.token, address)
       .then((res) => {
         if (res.data.ok) {
           setAddressSaved(true);
@@ -59,7 +62,7 @@ const Checkout = () => {
 
   const applyDiscountRate = () => {
     console.log("Send the Discount to the Back End", discount);
-    applyDiscount(user.token, discount).then((res) => {
+    applyDiscount(active.token, discount).then((res) => {
       console.log("RES ON DISCOUNT APPLIED", res.data);
       if (res.data) {
         setTotalAfterDiscount(res.data);
@@ -130,7 +133,7 @@ const Checkout = () => {
       payload: [],
     });
     // remove from backend
-    emptyUserCart(user.token).then((res) => {
+    emptyUserCart(active.token).then((res) => {
       setProducts([]);
       setTotal(0);
       toast.success("Cart has been Emptied. Continue Shopping");

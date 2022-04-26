@@ -111,33 +111,33 @@ const App = () => {
           <Route
             path="/user/password"
             element={
-              <UserRoute>
+              <ProtectedRoute>
                 <Password />
-              </UserRoute>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/user/wishlist"
             element={
-              <UserRoute>
+              <ProtectedRoute>
                 <Wishlist />
-              </UserRoute>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/checkout"
             element={
-              <UserRoute>
+              <ProtectedRoute>
                 <Checkout />
-              </UserRoute>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/payment"
             element={
-              <UserRoute>
+              <ProtectedRoute>
                 <Payment />
-              </UserRoute>
+              </ProtectedRoute>
             }
           />
 

@@ -7,20 +7,20 @@ import { DeleteOutlined } from "@ant-design/icons";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadWishlist();
   }, []);
 
   const loadWishlist = () =>
-    getWishlist(user.token).then((res) => {
+    getWishlist(active.token).then((res) => {
       console.log(res);
       setWishlist(res.data.wishlist);
     });
 
   const handleRemove = (productId) =>
-    removeWishlist(productId, user.token).then((res) => {
+    removeWishlist(productId, active.token).then((res) => {
       loadWishlist();
     });
 

@@ -5,7 +5,7 @@ import { userCart } from "../functions/user";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
 
 const Cart = () => {
-  const { cart, user } = useSelector((state) => ({ ...state }));
+  const { cart, active } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const Cart = () => {
 
   const saveOrderToDb = () => {
     // console.log("cart", JSON.stringify(cart, null, 4));
-    userCart(cart, user.token)
+    userCart(cart, active.token)
       .then((res) => {
         console.log("CART POST RES", res);
         if (res.data.ok) navigate("/checkout");
@@ -71,7 +71,7 @@ const Cart = () => {
         <hr />
         Total: <b>${getTotal()}</b>
         <br />
-        {user ? (
+        {active ? (
           <button
             onClick={saveOrderToDb}
             disabled={!cart.length}

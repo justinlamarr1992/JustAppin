@@ -23,10 +23,10 @@ const Register = () => {
     }
   };
 
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
   useEffect(() => {
-    if (user && user.token) navigate("/");
-  }, [user, navigate]);
+    if (active && active.token) navigate("/");
+  }, [active, navigate]);
 
   const registerForm = () => (
     <form onSubmit={handleSubmit}>

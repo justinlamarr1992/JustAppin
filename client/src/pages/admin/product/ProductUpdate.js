@@ -36,7 +36,7 @@ const initialState = {
 };
 
 const ProductUpdate = () => {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
   const { slug } = useParams();
   const navigate = useNavigate();
 
@@ -81,7 +81,7 @@ const ProductUpdate = () => {
     setLoading(true);
     values.subs = arrayOfSubs;
     values.category = selectedCategory ? selectedCategory : values.category;
-    updateProduct(slug, values, user.token)
+    updateProduct(slug, values, active.token)
       .then((res) => {
         setLoading(false);
         toast.success(`"${res.data.title}" is updated`);

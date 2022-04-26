@@ -11,7 +11,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import AdminNav from "../../../components/nav/AdminNav";
 
 const SubCreate = () => {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -35,7 +35,7 @@ const SubCreate = () => {
     e.preventDefault();
     // console.log(name);
     setLoading(true);
-    createSub({ name, parent: category }, user.token)
+    createSub({ name, parent: category }, active.token)
       .then((res) => {
         // console.log(res);
         setLoading(false);
@@ -55,7 +55,7 @@ const SubCreate = () => {
     // console.log(answer, slug);
     if (window.confirm("Delete?")) {
       setLoading(true);
-      removeSub(slug, user.token)
+      removeSub(slug, active.token)
         .then((res) => {
           setLoading(false);
           toast.error(`${res.data.name} deleted`);

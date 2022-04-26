@@ -6,12 +6,12 @@ import { StarOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router";
 
 const RatingModal = ({ children }) => {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
   const [modalVisible, setModalVisible] = useState(false);
   let navigate = useNavigate();
   let { slug } = useParams();
   const handleModal = () => {
-    if (user && user.token) {
+    if (active && active.token) {
       setModalVisible(true);
     } else {
       navigate({ pathname: "/login", state: { from: `/product/${slug}` } });
@@ -22,7 +22,7 @@ const RatingModal = ({ children }) => {
       <div onClick={handleModal}>
         <StarOutlined className="text-danger" />
         <br />
-        {user ? "Leave Rating" : "Log in to Leave Ratings"}
+        {active ? "Leave Rating" : "Log in to Leave Ratings"}
       </div>
       <Modal
         title="Leave Your Rating"

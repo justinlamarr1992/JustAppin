@@ -6,6 +6,8 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+
+  // getIdToken,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -21,28 +23,49 @@ export function UserAuthContextProvider({ children }) {
   }
   function logIn(email, password) {
     console.log("Email", email);
+    console.log("Using the function logIn");
     return signInWithEmailAndPassword(auth, email, password);
   }
-  function logOut() {
+  function logOut(auth) {
+    console.log("Using the function logOut");
     return signOut(auth);
   }
   function googleSignIn() {
     const googleAuthProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleAuthProvider);
   }
+  // function getIdToken() {
+  //   const test = onAuthStateChanged(auth, async (user) => {
+  //     if (user) {
+  //       const token = await getIdToken(user);
+  //     }
+  //   });
+  //   return test();
+  // }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("User Signed in");
+      console.log("User is: ", currentUser);
       setUser(currentUser);
     });
     return () => {
+      console.log("User Signed out");
+
       unsubscribe();
     };
   }, []);
 
   return (
     <userAuthContext.Provider
-      value={{ user, signUp, logIn, logOut, googleSignIn }}
+      value={{
+        user,
+        signUp,
+        logIn,
+        logOut,
+        googleSignIn,
+        // getIdToken
+      }}
     >
       {children}
     </userAuthContext.Provider>

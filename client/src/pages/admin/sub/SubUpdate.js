@@ -13,7 +13,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import AdminNav from "../../../components/nav/AdminNav";
 
 const SubUpdate = () => {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const SubUpdate = () => {
     e.preventDefault();
     // console.log(name);
     setLoading(true);
-    updateSub(slug, { name, parent }, user.token)
+    updateSub(slug, { name, parent }, active.token)
       .then((res) => {
         // console.log(res);
         setLoading(false);

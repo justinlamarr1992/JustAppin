@@ -10,7 +10,7 @@ import AdminNav from "../../../components/nav/AdminNav";
 import CategoryForm from "../../../components/forms/CategoryForm";
 
 const CategoryUpdate = () => {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const CategoryUpdate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    updateCategory(slug, { name }, user.token)
+    updateCategory(slug, { name }, active.token)
       .then((res) => {
         setLoading(false);
         setName("");

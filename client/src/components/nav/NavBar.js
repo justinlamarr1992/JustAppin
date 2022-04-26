@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 // replaced use history
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../../context/UserAuthContent";
-
+import { toast } from "react-toastify";
 import { Menu, Image, Layout, Badge } from "antd";
 import { Link } from "react-router-dom";
 import Logo from "../../images/Logo.png";
 import Search from "../forms/Search";
+
+import { signOut } from "firebase/auth";
 
 // ERROR MAY COME FROM HERE
 import firebase from "firebase/compat";
@@ -23,29 +25,43 @@ import {
   SkinOutlined,
 } from "@ant-design/icons";
 
-const { SubMenu, Item } = Menu;
-
 const NavBar = () => {
   const [current, setCurrent] = useState("home");
-  const { user } = useUserAuth();
-  // console.log(user);
+  const [error, setError] = useState("");
+
+  const { user, logOut } = useUserAuth();
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  // let { user, cart } = useSelector((state) => ({ ...state }));
+
+  let { active, cart } = useSelector((state) => ({ ...state }));
 
   const handleClick = (e) => {
     // console.log(e.key);
     setCurrent(e.key);
   };
-  const logout = () => {
-    firebase.auth().signOut();
-    dispatch({
-      type: "LOGOUT",
-      payload: null,
-    });
-    navigate("/login");
+
+  const handleLogOut = async (e) => {
+    e.preventDefault();
+    signOut(auth);
+    // try {
+    //   const result = await logOut();
+    //   console.log("The result", result);
+    // } catch (err) {
+    //   setError(err.message);
+    //   toast.error(`There was an error of ${err.message}`);
+    // }
+
+    // console.log("Logging Out");
+    // setCurrent(e.key);
   };
+  // const logout = () => {
+  //   firebase.auth().signOut();
+  //   dispatch({
+  //     type: "LOGOUT",
+  //     payload: null,
+  //   });
+  //   navigate("/login");
 
   const handleToggleClick = () => {
     console.log("Clciked");
@@ -91,6 +107,7 @@ const NavBar = () => {
         </nav>
         <nav className="navbar-links-right navbar-links">
           <ul className="nav-links">
+            {/* Attept udmy */}
             {/* <li>
               {!user && (
                 <Link key="login" className="" to="/login">
@@ -120,34 +137,45 @@ const NavBar = () => {
                 </Link>
               )}
             </li> */}
-            <li>
-              {!user && (
+            {/* attept 2 */}
+            {/* <li>
+              {!active && (
                 <Link key="login" className="" to="/login">
                   Login
                 </Link>
               )}
-              {user && user.role === "lead" && (
+              {active && active.role === "lead" && (
                 <Link to="/user/history">
                   {user.email && user.email.split("@")[0]}
                 </Link>
               )}
-              {user && user.role === "admin" && (
+              {active && active.role === "admin" && (
                 <Link to="/admin/dashboard">Dashboard</Link>
               )}
             </li>
 
             <li>
-              {!user && (
+              {!active && (
                 <Link key="register" className="" to="/register">
                   Register
                 </Link>
               )}
 
-              {user && (
+              {active && (
                 <Link key="logout" className="" onClick={logout} to="/">
-                  LogOut, {user.name}
+                  LogOut, {active.name}
                 </Link>
               )}
+            </li> */}
+            {/* attept 3 */}
+            <li>
+              <Link key="login" className="" to="/login">
+                Login
+              </Link>
+            </li>
+
+            <li>
+              <button onClick={handleLogOut}>LogOut</button>
             </li>
           </ul>
         </nav>

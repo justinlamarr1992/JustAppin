@@ -41,7 +41,7 @@ const ProductCreate = () => {
   const [showSub, setShowSub] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadCategories();
@@ -52,7 +52,7 @@ const ProductCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createProduct(values, user.token)
+    createProduct(values, active.token)
       .then((res) => {
         console.log(res);
         window.alert(
@@ -89,7 +89,7 @@ const ProductCreate = () => {
       .post(
         `${process.env.REACT_APP_API}/removeimage`,
         { public_id },
-        { headers: { authtoken: user ? user.token : "" } }
+        { headers: { authtoken: active ? active.token : "" } }
       )
       .then((res) => {
         setLoading(false);

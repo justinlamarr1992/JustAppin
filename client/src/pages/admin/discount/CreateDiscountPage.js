@@ -19,7 +19,7 @@ const CreateDiscountPage = () => {
   const [discounts, setDiscounts] = useState([]);
 
   // redux
-  const { user } = useSelector((state) => ({ ...state }));
+  const { active } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadAllDiscounts();
@@ -32,7 +32,7 @@ const CreateDiscountPage = () => {
     e.preventDefault();
     setLoading(true);
     console.table(name, expiry, rate);
-    createDiscount({ name, expiry, rate }, user.token)
+    createDiscount({ name, expiry, rate }, active.token)
       .then((res) => {
         loadAllDiscounts();
         setLoading(false);
@@ -47,7 +47,7 @@ const CreateDiscountPage = () => {
   const handleRemove = (discountId) => {
     if (window.confirm("Delete?")) {
       setLoading(true);
-      removeDiscount(discountId, user.token)
+      removeDiscount(discountId, active.token)
         .then((res) => {
           loadAllDiscounts();
           setLoading(false);
