@@ -2,25 +2,35 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContent";
-import { getAuth } from "../../firebase";
+import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { signUp } = useUserAuth();
+  // const { signUp } = useUserAuth();
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    try {
-      await signUp(email, password);
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-      toast.error(`There was an error of ${err.message}`);
-    }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCred) => {
+        //signed in
+        const user = userCred.user;
+        // console.log("user created: ".cred.user);
+      })
+      .catch((err) => {
+        const errorCode = err.code;
+        const errMessage = err.message;
+        setError(err.message);
+        toast.error(`There was an error of ${err.message}`);
+      });
+    setEmail("");
+    setPassword("");
+    navigate("/");
   };
 
   const { active } = useSelector((state) => ({ ...state }));

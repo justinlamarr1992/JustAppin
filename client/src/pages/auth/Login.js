@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { useNavigate, Link } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContent";
-// import { auth, googleAuthProvider } from "";
-// import { getAuth } from "../../firebase";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
@@ -14,6 +15,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { logIn, googleSignIn, getIdToken } = useUserAuth();
 
@@ -23,59 +25,113 @@ const Login = () => {
 
   const { active } = useSelector((state) => ({ ...state }));
 
-  useEffect(() => {
-    let intended = location.state;
-    if (intended) {
-      return;
-    } else {
-      if (active && active.token) navigate("/", { replace: true });
-    }
-  }, [active, navigate]);
+  // useEffect(() => {
+  //   let intended = location.state;
+  //   if (intended) {
+  //     return;
+  //   } else {
+  //     if (active && active.token) navigate("/", { replace: true });
+  //   }
+  // }, [active, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    try {
-      const result = await logIn(email, password);
-      console.log("The result", result);
-      const active = result;
-      // const auth1 = getAuth();
-      // const idTokenResult = await getIdToken();
-      // console.log("idToken is :", idTokenResult);
-      // const idTokenResult = await active.getIdTokenResult();
-      // console.log("IDToken: ", idTokenResult);
-      // createOrUpdateUser(idTokenResult.token).then((res) => {
-      //   dispatch({
-      //     type: "LOGGED_IN_USER",
-      //     payload: {
-      //       name: res.data.name,
-      //       email: res.data.email,
-      //       token: idTokenResult.token,
-      //       role: res.data.role,
-      //       _id: res.data._id,
-      //     },
-      //   });
-      //   roleBasedRedirect(res);
-      // });
-      // // navigate("/user/history");
-    } catch (err) {
-      setError(err.message);
-      toast.error(`There was an error of ${err.message}`);
-    }
-  };
+    // adding the const for similarites
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const idTokenResult = userCredential.user.accessToken;
+        console.log(idTokenResult);
+        createOrUpdateUser(idTokenResult)
+          .then(
+            (res) => console.log("it works")
+            // dispatch({
+            //   type: "LOGGED_IN_USER",
+            //   payload: {
+            //     name: res.name,
+            //     email: idTokenResult.email,
+            //     token: idTokenResult.accessToken,
+            //     role: res.data.role,
+            //     _id: idTokenResult.uid,
+            //   },
+            // })
+          )
+          .catch((err) => console.log("Naw it doesnt", err));
 
-  const roleBasedRedirect = (res) => {
-    let intended = location.state;
-    if (intended) {
-      navigate(intended.from, { replace: true });
-    } else {
-      if (res.data.role === "admin") {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/user/history");
-      }
-    }
+        // createOrUpdateUser(idTokenResult.accessToken).then((res) => {
+        //   console.log("Good");
+        //   dispatch({
+        //     type: "LOGGED_IN_USER",
+        //     payload: {
+        //       // name: res.name,
+        //       email: idTokenResult.email,
+        //       token: idTokenResult.accessToken,
+        //       // role: res.data.role,
+        //       _id: idTokenResult.uid,
+        //     },
+        //   });
+        //   console.log("Good");
+        // });
+        // navigate("/");
+      })
+      .catch((err) => {
+        const errorCode = err.code;
+        const errMessage = err.message;
+        setError(err.message);
+        toast.error(`There was an error of ${err.message}`);
+      });
   };
+  // try {
+  //   const result = await signInWithEmailAndPassword(auth, email, password)
+  //     .then(() => {
+  //       console.log("user logged in");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //       setError(err.message);
+  //       toast.error(`There was an error of ${err.message}`);
+  //     });
+  //     // const result = await logIn(email, password);
+  //     console.log("The result", result);
+  //     const active = result;
+  //     // const auth1 = getAuth();
+  //     // const idTokenResult = await getIdToken();
+  //     // console.log("idToken is :", idTokenResult);
+  //     // const idTokenResult = await active.getIdTokenResult();
+  //     // console.log("IDToken: ", idTokenResult);
+  //     // createOrUpdateUser(idTokenResult.token).then((res) => {
+  //     //   dispatch({
+  //     //     type: "LOGGED_IN_USER",
+  //     //     payload: {
+  //     //       name: res.data.name,
+  //     //       email: res.data.email,
+  //     //       token: idTokenResult.token,
+  //     //       role: res.data.role,
+  //     //       _id: res.data._id,
+  //     //     },
+  //     //   });
+  //     //   roleBasedRedirect(res);
+  //     // });
+  //     // // navigate("/user/history");
+  //   } catch (err) {
+  //     setError(err.message);
+  //     toast.error(`There was an error of ${err.message}`);
+  //   }
+  // };
+
+  // const roleBasedRedirect = (res) => {
+  //   let intended = location.state;
+  //   if (intended) {
+  //     navigate(intended.from, { replace: true });
+  //   } else {
+  //     if (res.data.role === "admin") {
+  //       navigate("/admin/dashboard");
+  //     } else {
+  //       navigate("/user/history");
+  //     }
+  //   }
+  // };
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();

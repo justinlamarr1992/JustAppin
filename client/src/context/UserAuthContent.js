@@ -43,18 +43,18 @@ export function UserAuthContextProvider({ children }) {
   //   return test();
   // }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("User Signed in");
-      console.log("User is: ", currentUser);
-      setUser(currentUser);
-    });
-    return () => {
-      console.log("User Signed out");
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     console.log("User Signed in");
+  //     console.log("User is: ", currentUser);
+  //     setUser(currentUser);
+  //   });
+  //   return () => {
+  //     console.log("User Signed out");
 
-      unsubscribe();
-    };
-  }, []);
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   return (
     <userAuthContext.Provider

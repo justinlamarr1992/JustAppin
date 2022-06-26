@@ -4,29 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../../context/UserAuthContent";
 import { toast } from "react-toastify";
-import { Menu, Image, Layout, Badge } from "antd";
 import { Link } from "react-router-dom";
 import Logo from "../../images/Logo.png";
 import Search from "../forms/Search";
 
-import { signOut } from "firebase/auth";
-
-// ERROR MAY COME FROM HERE
-import firebase from "firebase/compat";
-
-import {
-  HomeOutlined,
-  ShoppingCartOutlined,
-  UserOutlined,
-  UserAddOutlined,
-  SettingOutlined,
-  LogoutOutlined,
-  ShoppingOutlined,
-  SkinOutlined,
-} from "@ant-design/icons";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const NavBar = () => {
-  const [current, setCurrent] = useState("home");
   const [error, setError] = useState("");
 
   const { user, logOut } = useUserAuth();
@@ -36,25 +21,29 @@ const NavBar = () => {
 
   let { active, cart } = useSelector((state) => ({ ...state }));
 
-  const handleClick = (e) => {
-    // console.log(e.key);
-    setCurrent(e.key);
-  };
-
   const handleLogOut = async (e) => {
     e.preventDefault();
-    signOut(auth);
-    // try {
-    //   const result = await logOut();
-    //   console.log("The result", result);
-    // } catch (err) {
-    //   setError(err.message);
-    //   toast.error(`There was an error of ${err.message}`);
-    // }
-
-    // console.log("Logging Out");
-    // setCurrent(e.key);
+    signOut(auth)
+      .then(() => {
+        // console.log("The user signed out");
+        toast.success(`User Signed Out`);
+      })
+      .catch((err) => {
+        const errorCode = err.code;
+        const errMessage = err.message;
+        setError(err.message);
+        toast.error(`There was an error of ${err.message}`);
+      });
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    navigate("/login");
   };
+  // onAuthStateChanged(auth, (user) => {
+  //   console.log("User Status Changed:", user);
+  // });
+
   // const logout = () => {
   //   firebase.auth().signOut();
   //   dispatch({
@@ -177,6 +166,9 @@ const NavBar = () => {
             <li>
               <button onClick={handleLogOut}>LogOut</button>
             </li>
+            <Link key="register" className="" to="/register">
+              Register
+            </Link>
           </ul>
         </nav>
         {/* <a class="header-cta-button" href="#cta">
