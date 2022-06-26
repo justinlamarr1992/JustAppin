@@ -43,7 +43,7 @@ const NavBar = () => {
 
   const handleLogOut = async (e) => {
     e.preventDefault();
-    signOut(auth);
+    // signOut(auth);
     // try {
     //   const result = await logOut();
     //   console.log("The result", result);
