@@ -23,6 +23,7 @@ const NavBar = () => {
 
   const handleLogOut = async (e) => {
     e.preventDefault();
+
     signOut(auth)
       .then(() => {
         // console.log("The user signed out");

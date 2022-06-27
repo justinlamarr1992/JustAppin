@@ -4,10 +4,14 @@ import Multi from "../../images/MultiScreenLogo.png";
 const About = () => {
   return (
     <div id="about">
-      <img class="about-image" src={Multi} alt="Multiple Screens with Logo" />
-      <h2 class="about-title">About Us</h2>
+      <img
+        className="about-image"
+        src={Multi}
+        alt="Multiple Screens with Logo"
+      />
+      <h2 className="about-title">About Us</h2>
 
-      <p class="about-text text-gray">
+      <p className="about-text text-gray">
         JustAPPin’ is a Website and Mobile application Design Agency based in
         the Dallas-Fort Worth Metroplex. We are a small Black Owned, Family
         Business with a pretty big goal of designing a website for all of the
@@ -15,12 +19,12 @@ const About = () => {
       </p>
       {/* TODO: Video for people to see */}
 
-      <div class="about-action">
+      <div className="about-action">
         {/* <i class="fas action-web fa-7x fa-play-circle"></i> */}
         {/* <i class="fas action-mob fa-4x fa-play-circle"></i> */}
-        <button data-modal-target="#modal1">Learn More</button>
+        <button>Learn More</button>
       </div>
-      <div class="modal" id="modal1">
+      {/* <div class="modal" id="modal1">
         <div class="modal-header">
           <div class="title">About Us</div>
           <button data-close-button class="close-button">
@@ -103,7 +107,7 @@ const About = () => {
           <span class="modal-text-bold"> THEIR OWN</span>
           website.
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
