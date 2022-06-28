@@ -56,7 +56,7 @@ const Perk = () => {
   };
 
   return (
-    <div id="perks" className="feature">
+    <section id="perks" className="feature">
       <h2 className="feat-title">Features</h2>
       <div className="feat-l text-gray">
         {/* Take thes out and add them to there respected Modals figure out better things to be placed here */}
@@ -163,7 +163,7 @@ const Perk = () => {
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 export default Perk;

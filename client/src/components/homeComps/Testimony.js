@@ -2,13 +2,14 @@ import React from "react";
 import Client1 from "../../images/iWax.png";
 import Client2 from "../../images/Creative.png";
 import ClientWeb2 from "../../images/ChrisPic.png";
-import ClientYou from "../../images/yourcompany.png";
 import ClientWeb from "../../images/iWaxWeb.png";
+import ClientMob from "../../images/iWaxMob.jpg";
+import ClientMob2 from "../../images/ChrisPicMob.jpeg";
 
 const Testimony = () => {
   // Make this clients switchable
   return (
-    <div className="testimony">
+    <section className="testimony">
       <h2 className="test-title">Past Clients</h2>
       <p className="test-text">
         Scroll to view the work JustAPPin’ has done in the past.
@@ -36,6 +37,7 @@ const Testimony = () => {
               </a>
             </h6>
             <img src={ClientWeb} className="client-web" alt="" />
+            <img src={ClientMob} className="client-web client-mob" alt="" />
           </div>
         </li>
         <li className="client-list">
@@ -57,6 +59,7 @@ const Testimony = () => {
               </a>
             </h6>
             <img src={ClientWeb2} className="client-web" alt="" />
+            <img src={ClientMob2} className="client-web client-mob" alt="" />
           </div>
         </li>
         <li>Test</li>
@@ -90,7 +93,7 @@ const Testimony = () => {
         </div>
       </div>
       <img src={ClientWeb} className="client-web" alt="" /> */}
-    </div>
+    </section>
   );
 };
 export default Testimony;

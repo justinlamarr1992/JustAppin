@@ -425,7 +425,7 @@ const Shop = () => {
           {loading ? (
             <h4 className="text-danger">Loading...</h4>
           ) : (
-            <h4 className="text-danger">Products</h4>
+            <h4 className="text-danger">Demo Products Page</h4>
           )}
           {products.length < 1 && <p>No Products found</p>}
           <div className="row pb-5">

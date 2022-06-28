@@ -2,7 +2,7 @@ import React from "react";
 import Bene from "../../images/benefitsPic.jpg";
 const Benefit = () => {
   return (
-    <div className="benefit">
+    <section className="benefit">
       {/* TODO Picture of happy business internet user */}
       <img className="bene-pic" src={Bene} alt="" />
       <div className="bene-container">
@@ -40,7 +40,7 @@ const Benefit = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 export default Benefit;

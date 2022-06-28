@@ -59,8 +59,8 @@ const CTA = () => {
   };
 
   return (
-    <div id="cta">
-      <h5 className="call-title">Contact</h5>
+    <section id="cta">
+      <h2 className="call-title">Contact</h2>
       <h4 className="call-text">Get in Touch</h4>
       <form onSubmit={handleSubmit} className="forms">
         <input
@@ -99,7 +99,7 @@ const CTA = () => {
           Submit
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 export default CTA;

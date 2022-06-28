@@ -16,7 +16,7 @@ const About = () => {
     console.log("Title", title, "Body", body);
   };
   return (
-    <div id="about">
+    <section id="about">
       <img
         className="about-image"
         src={Multi}
@@ -142,7 +142,7 @@ const About = () => {
           />
         )}
       </div>
-    </div>
+    </section>
   );
 };
 export default About;

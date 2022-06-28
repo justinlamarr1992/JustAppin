@@ -3,7 +3,7 @@ import Logo from "../../images/Logo.png";
 
 const Hero = () => {
   return (
-    <div id="hero">
+    <section id="hero">
       <h1 className="hero-title">
         Small Business Applications
         <br />
@@ -36,7 +36,7 @@ const Hero = () => {
       <img className="hero-logo" src={Logo} alt="JustAPPin’ Logo" />
       {/* <Logo /> */}
       <i className="fas fa-2x fa-arrow-down"></i>
-    </div>
+    </section>
   );
 };
 export default Hero;
