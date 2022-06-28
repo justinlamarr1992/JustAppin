@@ -60,11 +60,11 @@ const CTA = () => {
 
   return (
     <div id="cta">
-      <h5 class="call-title">Contact</h5>
-      <h4 class="call-text">Get in Touch</h4>
-      <form onSubmit={handleSubmit} class="forms">
+      <h5 className="call-title">Contact</h5>
+      <h4 className="call-text">Get in Touch</h4>
+      <form onSubmit={handleSubmit} className="forms">
         <input
-          class="form-input1"
+          className="form-input1"
           type="text"
           value={name}
           name="name"
@@ -72,7 +72,7 @@ const CTA = () => {
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          class="form-input2"
+          className="form-input2"
           type="text"
           value={company}
           name="company"
@@ -80,7 +80,7 @@ const CTA = () => {
           onChange={(e) => setCompany(e.target.value)}
         />
         <input
-          class="form-input3"
+          className="form-input3"
           type="email"
           value={email}
           name="email"
@@ -88,14 +88,14 @@ const CTA = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          class="form-input4"
+          className="form-input4"
           type="tel"
           value={phone}
           name="phone"
           placeholder="Your Phone"
           onChange={(e) => setPhone(e.target.value)}
         />
-        <button class="form-button" type="submit">
+        <button className="form-button" type="submit">
           Submit
         </button>
       </form>

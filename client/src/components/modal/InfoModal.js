@@ -1,53 +1,24 @@
 import React from "react";
+import { RiCloseLine } from "react-icons/ri";
 
-const InfoModal = (props) => {
+const InfoModal = ({ setIsOpen, title, Title, body, Body }) => {
   return (
-    <div className="modal">
-      <h1>TEST</h1>
-      <div className="modal-header">
-        <div className="title">Modal Title</div>
-        <button data-close-button className="close-button">
-          &times;
-        </button>
+    <div className="overlay" onClick={() => setIsOpen(false)}>
+      <div className="centered">
+        <div className="modal-container">
+          <div className="modal-header">
+            {/* <div className="modal-text-title">Modal Title</div> */}
+            <div className="modal-text-title">
+              <div className="title">{Title}</div>
+            </div>
+            <button className="close-button" onClick={() => setIsOpen(false)}>
+              <RiCloseLine />
+            </button>
+          </div>
+          <div className="modal-body">{Body}</div>
+        </div>
       </div>
-      <div className="modal-body">Modal Body</div>
     </div>
   );
 };
-
 export default InfoModal;
-
-//   const openModalButtons = document.querySelectorAll("[data-modal-target]");
-//   const closeModalButtons = document.querySelectorAll("[data-close-button]");
-//   const overlay = document.getElementById("overlay");
-
-//   openModalButtons.forEach((button) => {
-//     button.addEventListener("click", () => {
-//       const modal = document.querySelector(button.dataset.modalTarget);
-//       openModal(modal);
-//     });
-//   });
-//   closeModalButtons.forEach((button) => {
-//     button.addEventListener("click", () => {
-//       const modal = button.closest(".modal");
-//       closeModal(modal);
-//     });
-//   });
-
-//   // overlay.addEventListener("click", () => {
-//   //   const modals = document.querySelectorAll(".modal.active");
-//   //   modals.forEach((modal) => {
-//   //     closeModal(modal);
-//   //   });
-//   // });
-
-//   function openModal(modal) {
-//     if (modal == null) return;
-//     modal.classList.add("active");
-//     overlay.classList.add("active");
-//   }
-//   function closeModal(modal) {
-//     if (modal == null) return;
-//     modal.classList.remove("active");
-//     overlay.classList.remove("active");
-//   }

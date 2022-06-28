@@ -95,10 +95,12 @@ const NavBar = () => {
             </li>
           </ul>
         </nav>
-        <nav className="navbar-links-right navbar-links">
-          <ul className="nav-links">
-            {/* Attept udmy */}
-            {/* <li>
+
+        {/* <nav className="navbar-links-right navbar-links">
+          <ul className="nav-links"> */}
+
+        {/* Attept udmy */}
+        {/* <li>
               {!user && (
                 <Link key="login" className="" to="/login">
                   Login
@@ -127,8 +129,8 @@ const NavBar = () => {
                 </Link>
               )}
             </li> */}
-            {/* attept 2 */}
-            {/* <li>
+        {/* attept 2 */}
+        {/* <li>
               {!active && (
                 <Link key="login" className="" to="/login">
                   Login
@@ -157,8 +159,8 @@ const NavBar = () => {
                 </Link>
               )}
             </li> */}
-            {/* attept 3 */}
-            <li>
+        {/* attept 3 */}
+        {/* <li>
               <Link key="login" className="" to="/login">
                 Login
               </Link>
@@ -171,12 +173,13 @@ const NavBar = () => {
               Register
             </Link>
           </ul>
-        </nav>
-        {/* <a class="header-cta-button" href="#cta">
+        </nav> */}
+
+        {/* <a className="header-cta-button" href="#cta">
           <button>Contact Us</button>
         </a> */}
         <a href="#" onClick={handleToggleClick} className="toggle-button .icon">
-          <i class="fa fa-bars fa-2x"></i>
+          <i className="fa fa-bars fa-2x"></i>
         </a>
       </div>
     </header>

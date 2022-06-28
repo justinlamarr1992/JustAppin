@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Hero from "../components/homeComps/Hero";
 import About from "../components/homeComps/About";
@@ -12,12 +12,19 @@ import InfoModal from "../components/modal/InfoModal";
 // import InfoModal from "../components/modal/InfoModal";
 
 const Home = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <div id="overlay">
-        <InfoModal />
-      </div>
       <Hero />
+      {/* <button onClick={() => setIsOpen(true)}>Open Modal</button>
+      {isOpen && (
+        <InfoModal
+          setIsOpen={setIsOpen}
+          Title={"Example Title"}
+          Body={"Example Body"}
+        />
+      )} */}
+
       <About />
       <Testimony />
       <Perk />

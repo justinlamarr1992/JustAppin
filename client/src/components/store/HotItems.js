@@ -32,7 +32,6 @@ const HotItems = () => {
   return (
     <div>
       <div className="container">
-        {" "}
         {loading ? (
           <LoadingCard count={4} />
         ) : (
@@ -49,10 +48,10 @@ const HotItems = () => {
         <nav className="col-md-4 offset-md-4 text-center pt-5 p-3">
           <Pagination
             current={page}
-            total={(productsCount / 3) * 10}
+            total={(productsCount / 4) * 10}
             onChange={(values) => setPage(values)}
           />
-        </nav>{" "}
+        </nav>
       </div>
     </div>
   );

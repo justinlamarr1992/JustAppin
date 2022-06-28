@@ -15,7 +15,7 @@ const Store = () => {
       <div>
         <div className="Jumbotron text-danger h1 font-weight-bold text-center">
           <Jumbotron
-            text={["Latest Products", "New Arrivals", "Best Sellers"]}
+            text={["Demo E-Commerence", "Custom Online Stores", "Best Sellers"]}
           />
         </div>
         <h4 className="text-center p-3 mt-5 mb-5 display-4 Jumbotron">
