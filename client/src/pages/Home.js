@@ -9,14 +9,21 @@ import CTA from "../components/homeComps/CTA";
 import Footer from "../components/nav/Footer";
 import InfoModal from "../components/modal/InfoModal";
 
+import { Helmet } from "react-helmet-async";
+
 // import InfoModal from "../components/modal/InfoModal";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
-      <Hero />
-      {/* <button onClick={() => setIsOpen(true)}>Open Modal</button>
+    <>
+      <Helmet>
+        <title>Testing the Title</title>
+        <meta name="This is the Name" content="This is the content" />
+      </Helmet>
+      <div>
+        <Hero />
+        {/* <button onClick={() => setIsOpen(true)}>Open Modal</button>
       {isOpen && (
         <InfoModal
           setIsOpen={setIsOpen}
@@ -25,12 +32,13 @@ const Home = () => {
         />
       )} */}
 
-      <About />
-      <Testimony />
-      <Perk />
-      <Benefit />
-      <CTA />
-    </div>
+        <About />
+        <Testimony />
+        <Perk />
+        <Benefit />
+        <CTA />
+      </div>
+    </>
   );
 };
 export default Home;
