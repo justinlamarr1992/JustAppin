@@ -1,10 +1,13 @@
 import React from "react";
 import Client1 from "../../images/iWax.png";
 import Client2 from "../../images/Creative.png";
-import ClientWeb2 from "../../images/ChrisPic.png";
+import Client3 from "../../images/NolaDC.png";
 import ClientWeb from "../../images/iWaxWeb.png";
+import ClientWeb2 from "../../images/ChrisPic.png";
+import ClientWeb3 from "../../images/NolaDCDesk.png";
 import ClientMob from "../../images/iWaxMob.jpg";
 import ClientMob2 from "../../images/ChrisPicMob.jpeg";
+import ClientMob3 from "../../images/NolaDCMob.png";
 
 const Testimony = () => {
   // Make this clients switchable
@@ -62,7 +65,31 @@ const Testimony = () => {
             <img src={ClientMob2} className="client-web client-mob" alt="" />
           </div>
         </li>
-        <li>Test</li>
+        <li className="client-list">
+          <div className="client c-top">
+            <img src={Client3} className="client-pic" alt="" />
+            <h5 className="client-text">
+              "Since my Website went live I have been able to manage current
+              clients and connect with new ones. I could not have before. It's
+              so much easier telling someone to visit my website. THANK YOU
+              JUSTAPPIN'"
+            </h5>
+            <h4 className="client-name">Dominic Rocha</h4>
+            <h6 className="client-company">
+              <a
+                className="client-link"
+                href="https://www.neworleansdrivewaycleaning.com/"
+                target="_blank"
+              >
+                New Orleans
+                <br />
+                Driveway Cleaning
+              </a>
+            </h6>
+            <img src={ClientWeb3} className="client-web" alt="" />
+            <img src={ClientMob3} className="client-web client-mob" alt="" />
+          </div>
+        </li>
         <li>Test</li>
       </ul>
       {/* <div className="test-clients">

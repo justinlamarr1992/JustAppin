@@ -1,5 +1,5 @@
 import React from "react";
-import { RiCloseLine } from "react-icons/ri";
+// import { RiCloseLine } from "react-icons/ri";
 
 const InfoModal = ({ setIsOpen, title, Title, body, Body }) => {
   return (
@@ -12,7 +12,7 @@ const InfoModal = ({ setIsOpen, title, Title, body, Body }) => {
               <div className="title">{Title}</div>
             </div>
             <button className="close-button" onClick={() => setIsOpen(false)}>
-              <RiCloseLine />
+              X{/* <RiCloseLine /> */}
             </button>
           </div>
           <div className="modal-body">{Body}</div>

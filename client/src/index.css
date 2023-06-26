@@ -838,7 +838,9 @@ button:hover {
   #cta {
     background: var(--c-background);
     display: grid;
-    grid-template-columns: var(--wcol);
+    /* grid-template-columns: var(--wcol); */
+    grid-template-columns: 10%  auto 25% auto 10%;
+
     grid-template-rows: repeat(4, auto);
     padding: var(--wpad);
   }

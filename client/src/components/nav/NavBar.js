@@ -46,12 +46,13 @@ const NavBar = () => {
   // });
 
   // const logout = () => {
-  //   firebase.auth().signOut();
+  //   auth().signOut();
   //   dispatch({
   //     type: "LOGOUT",
   //     payload: null,
   //   });
   //   navigate("/login");
+  // };
 
   const handleToggleClick = () => {
     console.log("Clciked");

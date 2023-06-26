@@ -5,18 +5,26 @@ const Hero = () => {
   return (
     <section id="hero">
       <h1 className="hero-title">
-        Small Business Applications
-        <br />
-        and Websites
+        Boost your <br />
+        Small Business <br />
+        online presence
       </h1>
-      <h5 className="hero-text">
+      {/* <h5 className="hero-text">
         At JustAPPin’, we solve your company’s present day problems with web
         applications of tomorrow. Let us mirror your hardworking and growing
         business with a beautiful and adequate Website.
+      </h5> */}
+      <h5 className="hero-text">
+        Our experienced team specializes in creating affordable, high-quality
+        websites tailored to meet the unique needs of small businesses. Drive
+        growth, attract customers, and establish credibility with a
+        professionally designed website. Contact us today for a free
+        consultation!
       </h5>
+
       <div className="hero-action">
         <a className="hero-link" href="#cta">
-          Contact Us
+          Build My Site
         </a>
         <div className="icons">
           <a

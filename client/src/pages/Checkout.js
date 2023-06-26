@@ -13,18 +13,25 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import AddressForm from "../components/forms/AddressForm";
 
-const initialState = {
-  street: "",
-  street2: "",
-  city: "",
-  state: "",
-  zip: "",
-};
+// const initialState = {
+//   street: "",
+//   street2: "",
+//   city: "",
+//   state: "",
+//   zip: Number,
+// };
 
 const Checkout = () => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
-  const [address, setAddress] = useState(initialState);
+  // const [address, setAddress] = useState(initialState);
+  const [address, setAddress] = useState({
+    street: "",
+    street2: "",
+    city: "",
+    state: "",
+    zip: Number,
+  });
   const [addressSaved, setAddressSaved] = useState(false);
   const [discount, setDiscount] = useState("");
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);

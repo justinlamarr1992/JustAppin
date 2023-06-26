@@ -2,11 +2,22 @@ import React, { useState } from "react";
 
 const AddressForm = ({
   saveAddressToDb,
-  handleChange,
-  address,
-  setAddress,
+  // handleChange,
+  // address,
+  // setAddress,
 }) => {
-  const { street, street2, city, state, zip } = address;
+  // const { street, street2, city, state, zip } = address;
+  // This is how you update the different parts of an object within the object
+  const [address, setAddress] = useState({
+    street: "",
+    street2: "",
+    city: "",
+    state: "",
+    zip: Number,
+  });
+  const handleChange = (e) => {
+    setAddress((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
   return (
     <form onSubmit={saveAddressToDb}>
       <div className="form-control">
@@ -15,7 +26,7 @@ const AddressForm = ({
           required
           type="text"
           name="street"
-          value={street}
+          // value={street}
           // value="Street"
           onChange={handleChange}
           className="form-control"
@@ -24,7 +35,7 @@ const AddressForm = ({
         <input
           type="text"
           name="street2"
-          value={street2}
+          // value={street2}
           onChange={handleChange}
           className="form-control"
         />
@@ -33,7 +44,7 @@ const AddressForm = ({
           required
           type="text"
           name="city"
-          value={city}
+          // value={city}
           onChange={handleChange}
           className="form-control"
         />
@@ -42,7 +53,7 @@ const AddressForm = ({
           required
           type="text"
           name="state"
-          value={state}
+          // value={state}
           onChange={handleChange}
           className="form-control"
         />
@@ -51,7 +62,7 @@ const AddressForm = ({
           required
           type="Number"
           name="zip"
-          value={zip}
+          // value={zip}
           onChange={handleChange}
           className="form-control"
         />

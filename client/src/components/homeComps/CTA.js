@@ -60,7 +60,7 @@ const CTA = () => {
 
   return (
     <section id="cta">
-      <h2 className="call-title">Contact</h2>
+      <h2 className="call-title">Build My Site</h2>
       <h4 className="call-text">Get in Touch</h4>
       <form onSubmit={handleSubmit} className="forms">
         <input
@@ -96,7 +96,7 @@ const CTA = () => {
           onChange={(e) => setPhone(e.target.value)}
         />
         <button className="form-button" type="submit">
-          Submit
+          Get My Website
         </button>
       </form>
     </section>

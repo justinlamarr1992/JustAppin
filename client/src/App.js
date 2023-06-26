@@ -8,43 +8,43 @@ import "react-toastify/dist/ReactToastify.css";
 import { LoadingOutlined } from "@ant-design/icons";
 import { UserAuthContextProvider } from "./context/UserAuthContent";
 
-const Login = lazy(() => import("./pages/auth/Login"));
-const Register = lazy(() => import("./pages/auth/Register"));
+// const Login = lazy(() => import("./pages/auth/Login"));
+// const Register = lazy(() => import("./pages/auth/Register"));
 const NavBar = lazy(() => import("./components/nav/NavBar"));
 const Footer = lazy(() => import("./components/nav/Footer"));
 const SideDrawer = lazy(() => import("./components/drawer/SideDrawer"));
 const Home = lazy(() => import("./pages/Home"));
-const Store = lazy(() => import("./pages/Store"));
-const Shop = lazy(() => import("./pages/Shop"));
-const RegisterComplete = lazy(() => import("./pages/auth/RegisterComplete"));
-const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
-const History = lazy(() => import("./pages/user/History"));
-const Password = lazy(() => import("./pages/user/Password"));
-const Wishlist = lazy(() => import("./pages/user/Wishlist"));
-const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
-const CategoryHome = lazy(() => import("./pages/category/CategoryHome"));
-const SubHome = lazy(() => import("./pages/sub/SubHome"));
-const Cart = lazy(() => import("./pages/Cart"));
-const Checkout = lazy(() => import("./pages/Checkout"));
-const Payment = lazy(() => import("./pages/Payment"));
-const AllProducts = lazy(() => import("./pages/admin/product/AllProducts"));
-const Product = lazy(() => import("./pages/Product"));
-const CategoryCreate = lazy(() =>
-  import("./pages/admin/category/CategoryCreate")
-);
-const CategoryUpdate = lazy(() =>
-  import("./pages/admin/category/CategoryUpdate")
-);
-const SubCreate = lazy(() => import("./pages/admin/sub/SubCreate"));
-const SubUpdate = lazy(() => import("./pages/admin/sub/SubUpdate"));
-const ProductCreate = lazy(() => import("./pages/admin/product/ProductCreate"));
-const ProductUpdate = lazy(() => import("./pages/admin/product/ProductUpdate"));
-const CreateDiscountPage = lazy(() =>
-  import("./pages/admin/discount/CreateDiscountPage")
-);
-const AdminRoute = lazy(() => import("./components/routes/AdminRoute"));
-const UserRoute = lazy(() => import("./components/routes/UserRoute"));
-const ProtectedRoute = lazy(() => import("./components/routes/ProtectedRoute"));
+// const Store = lazy(() => import("./pages/Store"));
+// const Shop = lazy(() => import("./pages/Shop"));
+// const RegisterComplete = lazy(() => import("./pages/auth/RegisterComplete"));
+// const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
+// const History = lazy(() => import("./pages/user/History"));
+// const Password = lazy(() => import("./pages/user/Password"));
+// const Wishlist = lazy(() => import("./pages/user/Wishlist"));
+// const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+// const CategoryHome = lazy(() => import("./pages/category/CategoryHome"));
+// const SubHome = lazy(() => import("./pages/sub/SubHome"));
+// const Cart = lazy(() => import("./pages/Cart"));
+// const Checkout = lazy(() => import("./pages/Checkout"));
+// const Payment = lazy(() => import("./pages/Payment"));
+// const AllProducts = lazy(() => import("./pages/admin/product/AllProducts"));
+// const Product = lazy(() => import("./pages/Product"));
+// const CategoryCreate = lazy(() =>
+//   import("./pages/admin/category/CategoryCreate")
+// );
+// const CategoryUpdate = lazy(() =>
+//   import("./pages/admin/category/CategoryUpdate")
+// );
+// const SubCreate = lazy(() => import("./pages/admin/sub/SubCreate"));
+// const SubUpdate = lazy(() => import("./pages/admin/sub/SubUpdate"));
+// const ProductCreate = lazy(() => import("./pages/admin/product/ProductCreate"));
+// const ProductUpdate = lazy(() => import("./pages/admin/product/ProductUpdate"));
+// const CreateDiscountPage = lazy(() =>
+//   import("./pages/admin/discount/CreateDiscountPage")
+// );
+// const AdminRoute = lazy(() => import("./components/routes/AdminRoute"));
+// const UserRoute = lazy(() => import("./components/routes/UserRoute"));
+// const ProtectedRoute = lazy(() => import("./components/routes/ProtectedRoute"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -88,7 +88,8 @@ const App = () => {
       <UserAuthContextProvider>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+
+          {/* <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register/complete" element={<RegisterComplete />} />
           <Route path="/forgot/password" element={<ForgotPassword />} />
@@ -97,10 +98,10 @@ const App = () => {
           <Route path="/product/:slug" element={<Product />} />
           <Route path="/category/:slug" element={<CategoryHome />} />
           <Route path="/sub/:slug" element={<SubHome />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} /> */}
 
           {/* User Routes */}
-          <Route
+          {/* <Route
             path="/user/history"
             element={
               <ProtectedRoute>
@@ -139,10 +140,10 @@ const App = () => {
                 <Payment />
               </ProtectedRoute>
             }
-          />
+          /> */}
 
           {/* Admin Routes */}
-          <Route
+          {/* <Route
             path="/admin/dashboard"
             element={
               <AdminRoute>
@@ -213,7 +214,7 @@ const App = () => {
                 <CreateDiscountPage />
               </AdminRoute>
             }
-          />
+          /> */}
         </Routes>
       </UserAuthContextProvider>
       <Footer />
