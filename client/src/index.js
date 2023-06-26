@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -16,17 +16,6 @@ import reportWebVitals from "./reportWebVitals";
 // import firebase from "./utils/firebase";
 
 const store = createStore(rootReducer, composeWithDevTools());
-
-// ReactDOM.render(
-//   // <React.StrictMode>
-//   <Provider store={store}>
-//     <BrowserRouter>
-//       <App />
-//     </BrowserRouter>
-//   </Provider>,
-//   // </React.StrictMode>
-//   document.getElementById("root")
-// );
 
 ReactDOM.render(
   <React.StrictMode>
